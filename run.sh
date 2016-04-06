@@ -1,3 +1,4 @@
+git pull
 cd app_spider
 nohup python ReadDatabase.py >log/Read.file 2>&1
 sleep 5
