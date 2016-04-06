@@ -144,7 +144,7 @@ class ConsumerBaiduspider(threading.Thread):
                             appData_all = pd.DataFrame(appData)
                             appData_all =appData_all[col]
                         #    print('ok')
-                            appData_all.to_csv('data/appDes.csv', mode='a', encoding='utf-8', index=None, header=None)
+                            appData_all.to_csv('../app_data/appDes.csv', mode='a', encoding='utf-8', index=None, header=None)
 
                             # appData_all.to_csv('data/appBaiduSpider.csv', mode='a', encoding='utf-8', index=None, header=None)
                             # print('from百度搜索' + key_word + '入库。。。')

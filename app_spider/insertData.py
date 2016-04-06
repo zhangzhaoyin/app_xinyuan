@@ -50,7 +50,7 @@ class Insertdata(threading.Thread):
                         appData_all = pd.DataFrame(appData)
                         col = [ 'kws','categories', 'details',  'source']
                         appData_all = appData_all[col]
-                        appData_all.to_csv('data/appDes.csv', mode='a', encoding='utf-8', index=None, header=None)
+                        appData_all.to_csv('../app_data/appDes.csv', mode='a', encoding='utf-8', index=None, header=None)
 
                         # 插入完成删除数据库中的app
                         # print (appData['kws'])
@@ -81,7 +81,7 @@ class Nodesapp(threading.Thread):
                 for unfindApp in self.q.queueNodes.keys():
 
                         # print ('::::::'+unfindApp)
-                        f = codecs.open('data/nofind.csv', 'a','utf-8')
+                        f = codecs.open('../app_data/nofind.csv', 'a','utf-8')
                         f.write(unfindApp + '\n')
                         self.q.queueNodes.delete(unfindApp)
                        # time.sleep(3)

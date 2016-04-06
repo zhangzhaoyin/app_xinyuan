@@ -36,5 +36,5 @@ class insertData():
         self.execute()
 
 if __name__ == '__main__':
-    data = insertData('./data/kw.csv')
+    data = insertData('../app_data/kw.csv')
     data.run()
