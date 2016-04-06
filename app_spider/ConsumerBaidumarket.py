@@ -85,7 +85,11 @@ class ConsumerBaidu(threading.Thread):
 
 
 if __name__ == '__main__':
-    d = database_list.database()
+    while True:
+        try:
+            d = database_list.database()
+            t1 = ConsumerBaidu(d)
+            t1.run()
+        except:
+            continue;
 
-    t1 = ConsumerBaidu(d)
-    t1.start()

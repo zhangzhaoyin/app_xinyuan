@@ -104,8 +104,8 @@ class Consumer360(threading.Thread):
         self.q.flag_baidu = True
 
 if __name__ == '__main__':
-    d = database_list.database()
 
+    d = database_list.database()
     t1 = Consumer360(d)
     t1.start()
 
