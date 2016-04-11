@@ -1,5 +1,6 @@
 import redis
 import pandas as pd
+import SendEmail
 
 
 class insertData():
@@ -17,18 +18,24 @@ class insertData():
     def execute(self):
         # batch_size = 10000
         pipeline_redis = self.redis.pipeline()
+        try:
+            kwlist = pd.read_csv(self.filename, header=None, encoding='utf8').dropna()
+            kwlist = kwlist.reset_index(level=1)
+            for k in kwlist.values:
+                value = k[0]
+                key = k[1].strip().lower()
+                # print (value)
+                pipeline_redis.set(key, value)
 
-        kwlist = pd.read_csv(self.filename, header=None).dropna()
-        # print (kwlist)
-        kwlist = kwlist.reset_index(level=1)
-        for k in kwlist.values:
-            value = k[0]
-            key = k[1].strip().lower()
-            # print (value)
-            pipeline_redis.set(key, value)
+            pipeline_redis.execute()
+            print('入库成功...')
+        except:
+            s =SendEmail.sendEmail()
+            s.readConfig()
+            s.send_mail(s.recipients,s.error1)
+            print ('数据异常')
 
-        pipeline_redis.execute()
-        print ('入库成功...')
+
 
 
     def run(self):
@@ -36,5 +43,6 @@ class insertData():
         self.execute()
 
 if __name__ == '__main__':
-    data = insertData('../app_data/kw.csv')
+    data = insertData('../app_data/kw2.csv')
     data.run()
+
