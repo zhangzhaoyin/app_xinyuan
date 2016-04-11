@@ -47,6 +47,6 @@ class insertData():
 
 if __name__ == '__main__':
     d = database_list.database()
-    data = insertData('../app_data/kw2.csv',d)
+    data = insertData('../app_data/kw.csv',d)
     data.run()
 
