@@ -32,6 +32,7 @@ class insertData():
             pipeline_redis.execute()
             print('入库成功...')
             self.database.flag_QQ = True
+            print (self.database.flag_QQ)
         except:
             s =SendEmail.sendEmail()
             s.readConfig()
