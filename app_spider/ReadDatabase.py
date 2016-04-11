@@ -1,13 +1,15 @@
 import redis
 import pandas as pd
 import SendEmail
+import database_list
 
 
 class insertData():
-    def __init__(self,filename):
+    def __init__(self,filename,database):
         self.host =  '127.0.0.1'
         self.port = 6379
         self.filename = filename
+        self.database = database
 
     def connection(self):
         self.redis = redis.StrictRedis(host='127.0.0.1', port=6379, db='1', charset='utf8', decode_responses=True)
@@ -29,6 +31,7 @@ class insertData():
 
             pipeline_redis.execute()
             print('入库成功...')
+            self.database.flag_QQ = True
         except:
             s =SendEmail.sendEmail()
             s.readConfig()
@@ -43,6 +46,7 @@ class insertData():
         self.execute()
 
 if __name__ == '__main__':
-    data = insertData('../app_data/kw2.csv')
+    d = database_list.database()
+    data = insertData('../app_data/kw2.csv',d)
     data.run()
 
