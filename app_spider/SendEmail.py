@@ -27,20 +27,23 @@ class sendEmail():
         msg['Subject'] = '报警邮件'   #设置主题
         msg['From'] = me
         msg['To'] = ";".join(to_list)
-        try:
-            s = smtplib.SMTP()
-            s.connect(mail_host)  #连接smtp服务器
-            s.login(mail_user,mail_pass)  #登陆服务器
-            s.sendmail(me, to_list, msg.as_string())  #发送邮件
-            s.close()
-            return True
-        except Exception as e:
-            print (str(e))
-            return False
+        while True:
+            try:
+                s = smtplib.SMTP()
+                s.connect(mail_host)  #连接smtp服务器
+                s.login(mail_user,mail_pass)  #登陆服务器
+                s.sendmail(me, to_list, msg.as_string())  #发送邮件
+                s.close()
+                break;
+                # return True
+            except Exception as e:
+                continue;
+                # print (str(e))
+                # return False
 
 
 
 if __name__ == '__main__':
-    s = sendEmail()
-    s.readConfig()
-    s.send_mail(mailto_list,s.error1)
+        s = sendEmail()
+        s.readConfig()
+        s.send_mail(s.recipients,s.error2)
